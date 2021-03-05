@@ -2665,9 +2665,8 @@ void FluxboxWindow::motionNotifyEvent(XMotionEvent &me) {
 
         int dx = me.x - m_button_grab_x;
         int dy = me.y - m_button_grab_y;
-
-        if (m_resize_corner == LEFTTOP || m_resize_corner == LEFTBOTTOM ||
-                m_resize_corner == LEFT) {
+        /*
+        if (m_resize_corner == LEFTTOP || m_resize_corner == LEFT || m_resize_corner == LEFTBOTTOM) { //here
             m_last_resize_w = frame().width() - dx;
             m_last_resize_x = frame().x() + dx;
         }
@@ -2676,11 +2675,12 @@ void FluxboxWindow::motionNotifyEvent(XMotionEvent &me) {
             m_last_resize_h = frame().height() - dy;
             m_last_resize_y = frame().y() + dy;
         }
-        if (m_resize_corner == LEFTBOTTOM || m_resize_corner == BOTTOM ||
-                m_resize_corner == RIGHTBOTTOM)
+        */
+        if (m_resize_corner == BOTTOM ||
+                m_resize_corner == RIGHTBOTTOM ) //here //m_resize_corner == LEFTBOTTOM ||
             m_last_resize_h = frame().height() + dy;
-        if (m_resize_corner == RIGHTBOTTOM || m_resize_corner == RIGHTTOP ||
-                m_resize_corner == RIGHT)
+        if (m_resize_corner == RIGHTBOTTOM ||
+                m_resize_corner == RIGHT) //here //m_resize_corner == RIGHTTOP ||
             m_last_resize_w = frame().width() + dx;
         if (m_resize_corner == CENTER) {
             // dx or dy must be at least 2
@@ -2710,7 +2710,8 @@ void FluxboxWindow::motionNotifyEvent(XMotionEvent &me) {
                     int botright_y = m_last_resize_y + m_last_resize_h;
 
                     switch (m_resize_corner) {
-                    case LEFTTOP:
+                    case LEFTTOP: //here
+                        /**
                         tx = m_last_resize_x;
                         ty = m_last_resize_y;
 
@@ -2722,9 +2723,12 @@ void FluxboxWindow::motionNotifyEvent(XMotionEvent &me) {
                         m_last_resize_w = botright_x - m_last_resize_x;
                         m_last_resize_h = botright_y - m_last_resize_y;
 
+                        */
+
                         break;
 
-                    case LEFTBOTTOM:
+                    case LEFTBOTTOM: //here
+                    /*
                         tx = m_last_resize_x;
                         ty = m_last_resize_y + m_last_resize_h;
 
@@ -2738,10 +2742,11 @@ void FluxboxWindow::motionNotifyEvent(XMotionEvent &me) {
                         m_last_resize_h = ty - m_last_resize_y;
 
                         m_last_resize_w = botright_x - m_last_resize_x;
+                        */
 
                         break;
-
-                    case RIGHTTOP:
+                    case RIGHTTOP: //here
+                        /*
                         tx = m_last_resize_x + m_last_resize_w;
                         ty = m_last_resize_y;
 
@@ -2756,8 +2761,9 @@ void FluxboxWindow::motionNotifyEvent(XMotionEvent &me) {
 
                         m_last_resize_h = botright_y - m_last_resize_y;
 
-                        break;
+                        */
 
+                        break;
                     case RIGHTBOTTOM:
                         tx = m_last_resize_x + m_last_resize_w;
                         ty = m_last_resize_y + m_last_resize_h;
@@ -3626,15 +3632,17 @@ void FluxboxWindow::fixSize() {
     m_last_resize_h = h;
 
     // move X if necessary
-    if (m_resize_corner == LEFTTOP || m_resize_corner == LEFTBOTTOM ||
-        m_resize_corner == LEFT) {
+    /*
+    if (m_resize_corner == LEFT || m_resize_corner == LEFTBOTTOM || m_resize_corner == LEFTTOP) { //here
         m_last_resize_x = frame().x() + frame().width() - m_last_resize_w;
     }
+    */
 
-    if (m_resize_corner == LEFTTOP || m_resize_corner == RIGHTTOP ||
-        m_resize_corner == TOP) {
+    /*if (m_resize_corner == LEFTTOP || m_resize_corner == RIGHTTOP ||
+        m_resize_corner == TOP) { //here
         m_last_resize_y = frame().y() + frame().height() - m_last_resize_h;
     }
+    */
 }
 
 void FluxboxWindow::moveResizeClient(WinClient &client) {
